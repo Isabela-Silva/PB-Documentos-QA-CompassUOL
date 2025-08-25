@@ -6,3 +6,5 @@
 
 # Desafios
 *Primeiramente, gostaria de relatar que tive dificuldades de mergear as branchs específicas (features) para a branch principal (main), mas acredito que consegui no final*
+
+*E existe um Readme.md só para o challenge da sprint 5*
