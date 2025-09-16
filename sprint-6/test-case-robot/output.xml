@@ -1,0 +1,1203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.11.13 on linux)" generated="2025-09-12T15:01:25.343860" rpa="false" schemaversion="5">
+<suite id="s1" name="MeuTeste3" source="/home/isadev/Projects/PB-Documentos/sprint-6/test-case-robot/MeuTeste3.robot">
+<test id="s1-t1" name="TC01 - Criar Usuario Com Campos Validos" line="11">
+<kw name="Criar Sessao Para API ServerRest" owner="MeuResource3">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-09-12T15:01:25.430520" level="INFO">Creating Session using : alias=minha_sessao, url=https://serverest.dev, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>minha_sessao</arg>
+<arg>${URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-09-12T15:01:25.430383" elapsed="0.000298"/>
+</kw>
+<status status="PASS" start="2025-09-12T15:01:25.429845" elapsed="0.000899"/>
+</kw>
+<kw name="Criar Novo Usuario Valido" owner="MeuResource3">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-12T15:01:25.431319" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-12T15:01:25.431124" elapsed="0.000220"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-12T15:01:25.431602" level="INFO">${payload} = {'nome': 'Isabela Regina', 'email': 'isabela@teste.com', 'password': '123456', 'administrador': '"true"'}</msg>
+<var>${payload}</var>
+<arg>nome=Isabela Regina</arg>
+<arg>email=isabela@teste.com</arg>
+<arg>password=123456</arg>
+<arg>administrador="true"</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-12T15:01:25.431433" elapsed="0.000190"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-12T15:01:25.950963" level="INFO">POST Request : url=https://serverest.dev/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '107'} 
+ body=b'{"nome": "Isabela Regina", "email": "isabela@teste.com", "password": "123456", "administrador": "\\"true\\""}' 
+ </msg>
+<msg time="2025-09-12T15:01:25.951103" level="INFO">POST Response : url=https://serverest.dev/usuarios 
+ status=400, reason=Bad Request 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'f5a27bbf515b10a36f1375f9fb7c2d3d', 'date': 'Fri, 12 Sep 2025 18:01:25 GMT', 'server': 'Google Frontend', 'Content-Length': '67'} 
+ body={
+    "administrador": "administrador deve ser 'true' ou 'false'"
+} 
+ </msg>
+<msg time="2025-09-12T15:01:25.951174" level="INFO">/home/isadev/miniconda3/envs/robot/lib/python3.11/site-packages/urllib3/connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'serverest.dev'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-09-12T15:01:25.951454" level="FAIL">HTTPError: 400 Client Error: Bad Request for url: https://serverest.dev/usuarios</msg>
+<var>${response}</var>
+<arg>minha_sessao</arg>
+<arg>/usuarios</arg>
+<arg>json=${payload}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="FAIL" start="2025-09-12T15:01:25.431708" elapsed="0.520676">HTTPError: 400 Client Error: Bad Request for url: https://serverest.dev/usuarios</status>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>201</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="NOT RUN" start="2025-09-12T15:01:25.952600" elapsed="0.000027"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<var>${usuario_id}</var>
+<arg>${response.json()}</arg>
+<arg>_id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="NOT RUN" start="2025-09-12T15:01:25.952715" elapsed="0.000022"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<arg>${usuario_id}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="NOT RUN" start="2025-09-12T15:01:25.952815" elapsed="0.000015"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>ID do novo usuario: ${usuario_id}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-09-12T15:01:25.952894" elapsed="0.000017"/>
+</kw>
+<return>
+<value>${usuario_id}</value>
+<status status="NOT RUN" start="2025-09-12T15:01:25.952948" elapsed="0.000028"/>
+</return>
+<status status="FAIL" start="2025-09-12T15:01:25.430925" elapsed="0.522209">HTTPError: 400 Client Error: Bad Request for url: https://serverest.dev/usuarios</status>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<arg>${usuario_id}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="NOT RUN" start="2025-09-12T15:01:25.953338" elapsed="0.000031"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Usuario criado com sucesso: ${usuario_id}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-09-12T15:01:25.953480" elapsed="0.000014"/>
+</kw>
+<doc>Testa a criacao de um usuario com todos os campos validos</doc>
+<tag>criacao</tag>
+<tag>positivo</tag>
+<tag>usuario</tag>
+<status status="FAIL" start="2025-09-12T15:01:25.429234" elapsed="0.524472">HTTPError: 400 Client Error: Bad Request for url: https://serverest.dev/usuarios</status>
+</test>
+<test id="s1-t2" name="TC02 - Criar Usuario Com Email Duplicado" line="20">
+<kw name="Criar Sessao Para API ServerRest" owner="MeuResource3">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-09-12T15:01:25.955376" level="INFO">Creating Session using : alias=minha_sessao, url=https://serverest.dev, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>minha_sessao</arg>
+<arg>${URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-09-12T15:01:25.955131" elapsed="0.000569"/>
+</kw>
+<status status="PASS" start="2025-09-12T15:01:25.954676" elapsed="0.001129"/>
+</kw>
+<kw name="Criar Usuario Com Email Duplicado" owner="MeuResource3">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-12T15:01:25.956460" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-12T15:01:25.956301" elapsed="0.000181"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-12T15:01:25.956697" level="INFO">${payload} = {'nome': 'Usuario Duplicado', 'email': 'isabela@teste.com', 'password': '123456', 'administrador': '"false"'}</msg>
+<var>${payload}</var>
+<arg>nome=Usuario Duplicado</arg>
+<arg>email=isabela@teste.com</arg>
+<arg>password=123456</arg>
+<arg>administrador="false"</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-12T15:01:25.956559" elapsed="0.000155"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-12T15:01:26.431770" level="INFO">POST Request : url=https://serverest.dev/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '111'} 
+ body=b'{"nome": "Usuario Duplicado", "email": "isabela@teste.com", "password": "123456", "administrador": "\\"false\\""}' 
+ </msg>
+<msg time="2025-09-12T15:01:26.431977" level="INFO">POST Response : url=https://serverest.dev/usuarios 
+ status=400, reason=Bad Request 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'a80db4c9c301e2090d4a72352a2b3a99', 'date': 'Fri, 12 Sep 2025 18:01:26 GMT', 'server': 'Google Frontend', 'Content-Length': '67'} 
+ body={
+    "administrador": "administrador deve ser 'true' ou 'false'"
+} 
+ </msg>
+<msg time="2025-09-12T15:01:26.432079" level="INFO">/home/isadev/miniconda3/envs/robot/lib/python3.11/site-packages/urllib3/connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'serverest.dev'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-09-12T15:01:26.432219" level="FAIL">HTTPError: 400 Client Error: Bad Request for url: https://serverest.dev/usuarios</msg>
+<var>${response}</var>
+<arg>minha_sessao</arg>
+<arg>/usuarios</arg>
+<arg>json=${payload}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="FAIL" start="2025-09-12T15:01:25.956780" elapsed="0.475873">HTTPError: 400 Client Error: Bad Request for url: https://serverest.dev/usuarios</status>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>400</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="NOT RUN" start="2025-09-12T15:01:26.432812" elapsed="0.000023"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="NOT RUN" start="2025-09-12T15:01:26.432873" elapsed="0.000019"/>
+</return>
+<status status="FAIL" start="2025-09-12T15:01:25.956050" elapsed="0.476933">HTTPError: 400 Client Error: Bad Request for url: https://serverest.dev/usuarios</status>
+</kw>
+<kw name="Criar Usuario Com Email Duplicado" owner="MeuResource3">
+<var>${response}</var>
+<status status="NOT RUN" start="2025-09-12T15:01:26.433201" elapsed="0.000033"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>400</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="NOT RUN" start="2025-09-12T15:01:26.433379" elapsed="0.000022"/>
+</kw>
+<doc>Testa a criacao de um usuario com email ja existente</doc>
+<tag>criacao</tag>
+<tag>negativo</tag>
+<tag>usuario</tag>
+<status status="FAIL" start="2025-09-12T15:01:25.953967" elapsed="0.479633">HTTPError: 400 Client Error: Bad Request for url: https://serverest.dev/usuarios</status>
+</test>
+<test id="s1-t3" name="TC03 - Criar Usuario Com Campos Nulos" line="29">
+<kw name="Criar Sessao Para API ServerRest" owner="MeuResource3">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-09-12T15:01:26.434568" level="INFO">Creating Session using : alias=minha_sessao, url=https://serverest.dev, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>minha_sessao</arg>
+<arg>${URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-09-12T15:01:26.434444" elapsed="0.000457"/>
+</kw>
+<status status="PASS" start="2025-09-12T15:01:26.434202" elapsed="0.000765"/>
+</kw>
+<kw name="Criar Usuario Com Campos Nulos" owner="MeuResource3">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-12T15:01:26.435630" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-12T15:01:26.435450" elapsed="0.000207"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-12T15:01:26.435888" level="INFO">${payload} = {'nome': '', 'email': '', 'password': '', 'administrador': ''}</msg>
+<var>${payload}</var>
+<arg>nome=</arg>
+<arg>email=</arg>
+<arg>password=</arg>
+<arg>administrador=</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-12T15:01:26.435754" elapsed="0.000151"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-12T15:01:26.911421" level="INFO">POST Request : url=https://serverest.dev/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '62'} 
+ body=b'{"nome": "", "email": "", "password": "", "administrador": ""}' 
+ </msg>
+<msg time="2025-09-12T15:01:26.911559" level="INFO">POST Response : url=https://serverest.dev/usuarios 
+ status=400, reason=Bad Request 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'e064189bfebeecece8faed046f126e67', 'date': 'Fri, 12 Sep 2025 18:01:26 GMT', 'server': 'Google Frontend', 'Content-Length': '215'} 
+ body={
+    "nome": "nome não pode ficar em branco",
+    "email": "email não pode ficar em branco",
+    "password": "password não pode ficar em branco",
+    "administrador": "administrador deve ser 'true' ou 'false'"
+} 
+ </msg>
+<msg time="2025-09-12T15:01:26.911656" level="INFO">/home/isadev/miniconda3/envs/robot/lib/python3.11/site-packages/urllib3/connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'serverest.dev'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-09-12T15:01:26.911785" level="FAIL">HTTPError: 400 Client Error: Bad Request for url: https://serverest.dev/usuarios</msg>
+<var>${response}</var>
+<arg>minha_sessao</arg>
+<arg>/usuarios</arg>
+<arg>json=${payload}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="FAIL" start="2025-09-12T15:01:26.435976" elapsed="0.476306">HTTPError: 400 Client Error: Bad Request for url: https://serverest.dev/usuarios</status>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>400</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="NOT RUN" start="2025-09-12T15:01:26.912459" elapsed="0.000024"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="NOT RUN" start="2025-09-12T15:01:26.912518" elapsed="0.000019"/>
+</return>
+<var>${response}</var>
+<status status="FAIL" start="2025-09-12T15:01:26.435192" elapsed="0.477429">HTTPError: 400 Client Error: Bad Request for url: https://serverest.dev/usuarios</status>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>400</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="NOT RUN" start="2025-09-12T15:01:26.912740" elapsed="0.000017"/>
+</kw>
+<doc>Testa a criacao de um usuario com campos obrigatorios nulos</doc>
+<tag>criacao</tag>
+<tag>negativo</tag>
+<tag>usuario</tag>
+<status status="FAIL" start="2025-09-12T15:01:26.433810" elapsed="0.479118">HTTPError: 400 Client Error: Bad Request for url: https://serverest.dev/usuarios</status>
+</test>
+<test id="s1-t4" name="TC04 - Obter Todos Os Usuarios" line="37">
+<kw name="Criar Sessao Para API ServerRest" owner="MeuResource3">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-09-12T15:01:26.913891" level="INFO">Creating Session using : alias=minha_sessao, url=https://serverest.dev, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>minha_sessao</arg>
+<arg>${URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-09-12T15:01:26.913786" elapsed="0.000354"/>
+</kw>
+<status status="PASS" start="2025-09-12T15:01:26.913582" elapsed="0.000615"/>
+</kw>
+<kw name="Obter Todos Os Usuarios" owner="MeuResource3">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-09-12T15:01:27.522745" level="INFO">GET Request : url=https://serverest.dev/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-09-12T15:01:27.523017" level="INFO">GET Response : url=https://serverest.dev/usuarios 
+ status=200, reason=OK 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '6e659ae45d68985b2951e8d420102aa4', 'date': 'Fri, 12 Sep 2025 18:01:27 GMT', 'server': 'Google Frontend', 'Content-Length': '32905'} 
+ body={
+    "quantidade": 147,
+    "usuarios": [
+        {
+            "nome": "Lucas Silva",
+            "email": "lucas1757683864789@gmail.com",
+            "password": "123456",
+            "administrador": "true",
+            "_id": "0KuP2PJQPNADdKs3"
+        },
+        {
+            "nome": "Usuario Hotmail",
+            "email": "usuario@hotmail.com",
+            "password": "Senha123",
+            "administrador": "false",
+            "_id": "0VG3g3xoZLlRAUZK"
+        },
+        {
+            "nome": "Yrvin Pachas Saravia",
+            "email": "yrvin+368830f6-c923-4da3-91da-e3406e84e450@gmail.com",
+            "password": "testerQA",
+            "administrador": "true",
+            "_id": "0rQGaXVldR38BMJR"
+        },
+        {
+            "nome": "Fulano da Silva",
+            "email": "fulano@qa.com",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "0uxuPY0cbmQhpEz1"
+        },
+        {
+            "nome": "Craig",
+            "email": "shawn93@example.com",
+            "password": "&amp;g0+74Fj",
+            "administrador": "true",
+            "_id": "17RAuj7zScs82Ict"
+        },
+        {
+            "nome": "João Paulo",
+            "email": "joaopaulodevia@gmail.com",
+            "password": "123456",
+            "administrador": "false",
+            "_id": "19wxsD7j8GVPelau"
+        },
+        {
+            "nome": "testee",
+            "email": "fulano@qaa.com",
+            "password": "12345",
+            "administrador": "true",
+            "_id": "1KgTfJ6r3LtHVrU4"
+        },
+        {
+            "nome": "Yrvin Pachas Saravia",
+            "email": "yrvin+b3e56352-8453-4049-a61e-2b2625d381ce@gmail.com",
+            "password": "testerQA",
+            "administrador": "true",
+            "_id": "2zgNr2Nlklovfwr3"
+        },
+        {
+            "nome": "QA 1757700010919",
+            "email": "qa_1757700010919@mail.com",
+            "password": "teste",
+            "administrador": "false",
+            "_id": "3TQnRoeoJgp9SGyl"
+        },
+        {
+            "nome": "Yrvin Pachas Saravia",
+            "email": "yrvin+712affe8-61f7-49b8-88d3-e953afa94657@gmail.com",
+            "password": "testerQA",
+            "administrador": "true",
+            "_id": "3itZRw72TjqudJDT"
+        },
+        {
+            "nome": "Ícaro Cau",
+            "email": "icaro1757685627984@gmail.com",
+            "password": "123456",
+            "administrador": "true",
+            "_id": "4JzzmatYqreX2hxj"
+        },
+        {
+            "nome": "Yrvin Pachas Saravia",
+            "email": "yrvin+a67e8f74-281a-464a-944b-2c3d31e672a8@gmail.com",
+            "password": "testerQA",
+            "administrador": "true",
+            "_id": "5sQn2mw5IQb5uLWe"
+        },
+        {
+            "nome": "Yrvin Pachas Saravia",
+            "email": "yrvin+cf41d7d3-c974-4d87-b839-74935927b504@gmail.com",
+            "password": "testerQA",
+            "administrador": "true",
+            "_id": "6eoaPbBxQArv4HPN"
+        },
+        {
+            "nome": "Fuzarii",
+            "email": "Fuzarii9205@qa.com.br",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "6pz3Irmmt3JqekZB"
+        },
+        {
+            "nome": "NuevoNombre",
+            "email": "pardito@gmail.com",
+            "password": "nuevoPass123",
+            "administrador": "false",
+            "_id": "6zTyLzisIzcr6ePR"
+        },
+        {
+            "nome": "Teste",
+            "email": "testando01@teste.com",
+            "password": "215487",
+            "administrador": "false",
+            "_id": "7CfzYFBpJZnCs2Ob"
+        },
+        {
+            "nome": "Fuzarii",
+            "email": "Fuzarii1958@qa.com.br",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "7THxLtauMP6yaJzH"
+        },
+        {
+            "nome": "Lucas Silva",
+            "email": "lucas1757684421034@gmail.com",
+            "password": "123456",
+            "administrador": "true",
+            "_id": "7VKrWE7fAfaQH9r4"
+        },
+        {
+            "nome": "Teste API",
+            "email": "teste@api.com",
+            "password": "123456",
+            "administrador": "true",
+            "_id": "7ZOgTlXqUNzKiJuQ"
+        },
+        {
+            "nome": "Abc MDH",
+            "email": "ahsgagsags@qa.com.br",
+            "password": "teste456",
+            "administrador": "true",
+            "_id": "7my51npMFALYeRtl"
+        },
+        {
+            "nome": "Yrvin Pachas Saravia",
+            "email": "yrvin+b1209d90-8de3-4373-bd61-dc8aee0cd8b3@gmail.com",
+            "password": "testerQA",
+            "administrador": "true",
+            "_id": "803UNszXlLVTlYg8"
+        },
+        {
+            "nome": "Gabriel Volponi",
+            "email": "gabriel533@teste.com",
+            "password": "Mudar123@",
+            "administrador": "true",
+            "_id": "8xSE3tJQ4VtDaKgp"
+        },
+        {
+            "nome": "Yrvin put",
+            "email": "yrvin+162d108a-94a1-4dfe-9b7c-ed4469f20df6@gmail.com",
+            "password": "nuevo",
+            "administrador": "false",
+            "_id": "90gtABnHHnxrIg5B"
+        },
+        {
+            "nome": "Ícaro Cau",
+            "email": "icaro1757683299973@gmail.com",
+            "password": "123456",
+            "administrador": "true",
+            "_id": "955w1iADu5Rk51gN"
+        },
+        {
+            "nome": "Yrvin Pachas Saravia",
+            "email": "yrvin+b90b10b4-6c17-4694-8c7a-31e65748d333@gmail.com",
+            "password": "testerQA",
+            "administrador": "true",
+            "_id": "9Q9Q9M7en4cV1sbj"
+        },
+        {
+            "nome": "Sandro Huamán Mendoza",
+            "email": "sandro+7ec12258-9f0e-4b9c-81fc-c7ce7edeb4c7@gmail.com",
+            "password": "testerQA",
+            "administrador": "true",
+            "_id": "9vi3Bl1jlacBxG1G"
+        },
+        {
+            "nome": "jose mendoza",
+            "email": "jmendoza@qa.com.br",
+            "password": "tester",
+            "administrador": "true",
+            "_id": "A63hX2L4Vq5Vy1Ep"
+        },
+        {
+            "nome": "Sandro Huamán Mendoza",
+            "email": "sandro+1d1a9ab1-1838-47b2-8ad0-f92c5aa5a595@gmail.com",
+            "password": "testerQA",
+            "administrador": "true",
+            "_id": "AW8iXOLUwDiutF6O"
+        },
+        {
+            "nome": "Roger Dibbert8237",
+            "email": "Hulda8@hotmail.com",
+            "password": "123456",
+            "administrador": "false",
+            "_id": "Aej6miPrHRgz9kHF"
+        },
+        {
+            "nome": "Gabriel Volponi",
+            "email": "gabriel412@teste.com",
+            "password": "Mudar123@",
+            "administrador": "true",
+            "_id": "B2ZYnl0ufJDtlc8t"
+        },
+        {
+            "nome": "QA 1757700009972",
+            "email": "qa_1757700009972@mail.com",
+            "password": "teste",
+            "administrador": "false",
+            "_id": "BSsi35mvhAKWR1Xh"
+        },
+        {
+            "nome": "Fuzarii",
+            "email": "Fuzarii4048@qa.com.br",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "BT5TqTOlDkNKvUlK"
+        },
+        {
+            "nome": "Ícaro Cau",
+            "email": "icaro1757685624912@gmail.com",
+            "password": "123456",
+            "administrador": "true",
+            "_id": "Cv5fey9nYHNaRI29"
+        },
+        {
+            "nome": "Lucas Silva",
+            "email": "lucas1757684017267@gmail.com",
+            "password": "123456",
+            "administrador": "true",
+            "_id": "CyOxtr4IORWlXvOu"
+        },
+        {
+            "nome": "Usuário Teste",
+            "email": "user1757683754467@teste.com",
+            "password": "123456",
+            "administrador": "false",
+            "_id": "DR3yGjQJTgXXPooK"
+        },
+        {
+            "nome": "Fuzarii",
+            "email": "Fuzarii7893@qa.com.br",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "DWAawoBn7ESZYetb"
+        },
+        {
+            "nome": "Yrvin put",
+            "email": "yrvin+d609b105-2e98-4cb2-a798-d658f2f8543a@gmail.com",
+            "password": "nuevo",
+            "administrador": "false",
+            "_id": "DvXmZYeJc6L65J9H"
+        },
+        {
+            "nome": "Lucas Silva",
+            "email": "lucas1757684004483@gmail.com",
+            "password": "123456",
+            "administrador": "true",
+            "_id": "ECCjlfq7djcZ5L94"
+        },
+        {
+            "nome": "Yrvin put",
+            "email": "yrvin+f9e483cd-cb12-44d2-851c-36f80aed2401@gmail.com",
+            "password": "nuevo",
+            "administrador": "false",
+            "_id": "ElBN4LInXxxgemcF"
+        },
+        {
+            "nome": "Ícaro Cau",
+            "email": "icaro1757687275647@gmail.com",
+            "password": "123456",
+            "administrador": "true",
+            "_id": "ExnXmKPb3XFonh7E"
+        },
+        {
+            "nome": "Yrvin Pachas Saravia",
+            "email": "yrvin+16780429-d407-4c8f-99a9-a1e15b73df7b@gmail.com",
+            "password": "testerQA",
+            "administrador": "true",
+            "_id": "FkrJrRttnS8WY13R"
+        },
+        {
+            "nome": "Fulano da Silva",
+            "email": "beltrano8389@qa.com.br",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "G11RTuLiy7D8YoRQ"
+        },
+        {
+            "nome": "QA 1757700055152",
+            "email": "qa_1757700055152@mail.com",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "GYWoou1g7mi6fqKt"
+        },
+        {
+            "nome": "Ícaro Cau",
+            "email": "icaro1757685620603@gmail.com",
+            "password": "123456",
+            "administrador": "true",
+            "_id": "GoPFJltzlKzXMGVX"
+        },
+        {
+            "nome": "Gabriel Volponi",
+            "email": "gabriel398@teste.com",
+            "p... (set the log level to DEBUG or TRACE to see the full content) 
+ </msg>
+<msg time="2025-09-12T15:01:27.523488" level="INFO">/home/isadev/miniconda3/envs/robot/lib/python3.11/site-packages/urllib3/connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'serverest.dev'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-09-12T15:01:27.523713" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>minha_sessao</arg>
+<arg>/usuarios</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-12T15:01:26.914590" elapsed="0.609169"/>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>200</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="PASS" start="2025-09-12T15:01:27.524029" elapsed="0.000312"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2025-09-12T15:01:27.524402" elapsed="0.000051"/>
+</return>
+<msg time="2025-09-12T15:01:27.524589" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<status status="PASS" start="2025-09-12T15:01:26.914373" elapsed="0.610238"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2025-09-12T15:01:27.525312" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-09-12T15:01:27.524778" elapsed="0.000610"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Total de usuarios encontrados</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-09-12T15:01:27.525597" elapsed="0.000186"/>
+</kw>
+<doc>Testa a consulta de todos os usuarios cadastrados</doc>
+<tag>consulta</tag>
+<tag>positivo</tag>
+<tag>usuario</tag>
+<status status="PASS" start="2025-09-12T15:01:26.913172" elapsed="0.612849"/>
+</test>
+<test id="s1-t5" name="TC05 - Obter Usuario Por ID Valido" line="46">
+<kw name="Criar Sessao Para API ServerRest" owner="MeuResource3">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-09-12T15:01:27.527357" level="INFO">Creating Session using : alias=minha_sessao, url=https://serverest.dev, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>minha_sessao</arg>
+<arg>${URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-09-12T15:01:27.527218" elapsed="0.000476"/>
+</kw>
+<status status="PASS" start="2025-09-12T15:01:27.526929" elapsed="0.000830"/>
+</kw>
+<kw name="Criar Novo Usuario Valido" owner="MeuResource3">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-12T15:01:27.528521" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-12T15:01:27.528298" elapsed="0.000263"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-12T15:01:27.528880" level="INFO">${payload} = {'nome': 'Isabela Regina', 'email': 'isabela@teste.com', 'password': '123456', 'administrador': '"true"'}</msg>
+<var>${payload}</var>
+<arg>nome=Isabela Regina</arg>
+<arg>email=isabela@teste.com</arg>
+<arg>password=123456</arg>
+<arg>administrador="true"</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-12T15:01:27.528696" elapsed="0.000206"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-12T15:01:28.036049" level="INFO">POST Request : url=https://serverest.dev/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '107'} 
+ body=b'{"nome": "Isabela Regina", "email": "isabela@teste.com", "password": "123456", "administrador": "\\"true\\""}' 
+ </msg>
+<msg time="2025-09-12T15:01:28.036149" level="INFO">POST Response : url=https://serverest.dev/usuarios 
+ status=400, reason=Bad Request 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'c65b9fced2e54fa879bab1eb98d274bf', 'date': 'Fri, 12 Sep 2025 18:01:27 GMT', 'server': 'Google Frontend', 'Content-Length': '67'} 
+ body={
+    "administrador": "administrador deve ser 'true' ou 'false'"
+} 
+ </msg>
+<msg time="2025-09-12T15:01:28.036212" level="INFO">/home/isadev/miniconda3/envs/robot/lib/python3.11/site-packages/urllib3/connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'serverest.dev'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-09-12T15:01:28.036328" level="FAIL">HTTPError: 400 Client Error: Bad Request for url: https://serverest.dev/usuarios</msg>
+<var>${response}</var>
+<arg>minha_sessao</arg>
+<arg>/usuarios</arg>
+<arg>json=${payload}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="FAIL" start="2025-09-12T15:01:27.528997" elapsed="0.507658">HTTPError: 400 Client Error: Bad Request for url: https://serverest.dev/usuarios</status>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>201</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="NOT RUN" start="2025-09-12T15:01:28.036787" elapsed="0.000019"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<var>${usuario_id}</var>
+<arg>${response.json()}</arg>
+<arg>_id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="NOT RUN" start="2025-09-12T15:01:28.036867" elapsed="0.000012"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<arg>${usuario_id}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="NOT RUN" start="2025-09-12T15:01:28.036942" elapsed="0.000012"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>ID do novo usuario: ${usuario_id}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-09-12T15:01:28.037014" elapsed="0.000025"/>
+</kw>
+<return>
+<value>${usuario_id}</value>
+<status status="NOT RUN" start="2025-09-12T15:01:28.037123" elapsed="0.000041"/>
+</return>
+<var>${usuario_id}</var>
+<status status="FAIL" start="2025-09-12T15:01:27.527989" elapsed="0.509345">HTTPError: 400 Client Error: Bad Request for url: https://serverest.dev/usuarios</status>
+</kw>
+<kw name="Obter Usuario Por ID Valido" owner="MeuResource3">
+<var>${response}</var>
+<arg>${usuario_id}</arg>
+<status status="NOT RUN" start="2025-09-12T15:01:28.037769" elapsed="0.000079"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="NOT RUN" start="2025-09-12T15:01:28.038116" elapsed="0.000031"/>
+</kw>
+<doc>Testa a consulta de um usuario especifico por ID valido</doc>
+<tag>consulta</tag>
+<tag>positivo</tag>
+<tag>usuario</tag>
+<status status="FAIL" start="2025-09-12T15:01:27.526428" elapsed="0.512067">HTTPError: 400 Client Error: Bad Request for url: https://serverest.dev/usuarios</status>
+</test>
+<test id="s1-t6" name="TC06 - Obter Usuario Com ID Incompleto" line="55">
+<kw name="Criar Sessao Para API ServerRest" owner="MeuResource3">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-09-12T15:01:28.039517" level="INFO">Creating Session using : alias=minha_sessao, url=https://serverest.dev, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>minha_sessao</arg>
+<arg>${URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-09-12T15:01:28.039418" elapsed="0.000276"/>
+</kw>
+<status status="PASS" start="2025-09-12T15:01:28.039222" elapsed="0.000529"/>
+</kw>
+<kw name="Obter Usuario Com ID Incompleto" owner="MeuResource3">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-09-12T15:01:28.518625" level="INFO">GET Request : url=https://serverest.dev/usuarios/123 
+ path_url=/usuarios/123 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-09-12T15:01:28.518720" level="INFO">GET Response : url=https://serverest.dev/usuarios/123 
+ status=400, reason=Bad Request 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '815ca9c9bd04a65464fab3dbb0e2339a', 'date': 'Fri, 12 Sep 2025 18:01:28 GMT', 'server': 'Google Frontend', 'Content-Length': '67'} 
+ body={
+    "id": "id deve ter exatamente 16 caracteres alfanuméricos"
+} 
+ </msg>
+<msg time="2025-09-12T15:01:28.518784" level="INFO">/home/isadev/miniconda3/envs/robot/lib/python3.11/site-packages/urllib3/connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'serverest.dev'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-09-12T15:01:28.518909" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>minha_sessao</arg>
+<arg>/usuarios/${id_incompleto}</arg>
+<arg>expected_status=400</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-09-12T15:01:28.040135" elapsed="0.478795"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2025-09-12T15:01:28.519009" elapsed="0.000059"/>
+</return>
+<msg time="2025-09-12T15:01:28.519189" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>123</arg>
+<status status="PASS" start="2025-09-12T15:01:28.039914" elapsed="0.479292"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<msg time="2025-09-12T15:01:28.519766" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>400</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="PASS" start="2025-09-12T15:01:28.519377" elapsed="0.000438"/>
+</kw>
+<doc>Testa a consulta de um usuario com ID incompleto/invalido</doc>
+<tag>consulta</tag>
+<tag>negativo</tag>
+<tag>usuario</tag>
+<status status="PASS" start="2025-09-12T15:01:28.038784" elapsed="0.481179"/>
+</test>
+<test id="s1-t7" name="TC07 - Atualizar Usuario Valido" line="63">
+<kw name="Criar Sessao Para API ServerRest" owner="MeuResource3">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-09-12T15:01:28.520822" level="INFO">Creating Session using : alias=minha_sessao, url=https://serverest.dev, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>minha_sessao</arg>
+<arg>${URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-09-12T15:01:28.520705" elapsed="0.000434"/>
+</kw>
+<status status="PASS" start="2025-09-12T15:01:28.520520" elapsed="0.000675"/>
+</kw>
+<kw name="Criar Novo Usuario Valido" owner="MeuResource3">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-12T15:01:28.521737" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-12T15:01:28.521594" elapsed="0.000167"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-12T15:01:28.522000" level="INFO">${payload} = {'nome': 'Isabela Regina', 'email': 'isabela@teste.com', 'password': '123456', 'administrador': '"true"'}</msg>
+<var>${payload}</var>
+<arg>nome=Isabela Regina</arg>
+<arg>email=isabela@teste.com</arg>
+<arg>password=123456</arg>
+<arg>administrador="true"</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-12T15:01:28.521867" elapsed="0.000149"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-12T15:01:29.006994" level="INFO">POST Request : url=https://serverest.dev/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '107'} 
+ body=b'{"nome": "Isabela Regina", "email": "isabela@teste.com", "password": "123456", "administrador": "\\"true\\""}' 
+ </msg>
+<msg time="2025-09-12T15:01:29.007109" level="INFO">POST Response : url=https://serverest.dev/usuarios 
+ status=400, reason=Bad Request 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': 'e1da449be76328aa1b0003cde8a710dd', 'date': 'Fri, 12 Sep 2025 18:01:28 GMT', 'server': 'Google Frontend', 'Content-Length': '67'} 
+ body={
+    "administrador": "administrador deve ser 'true' ou 'false'"
+} 
+ </msg>
+<msg time="2025-09-12T15:01:29.007208" level="INFO">/home/isadev/miniconda3/envs/robot/lib/python3.11/site-packages/urllib3/connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'serverest.dev'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-09-12T15:01:29.007319" level="FAIL">HTTPError: 400 Client Error: Bad Request for url: https://serverest.dev/usuarios</msg>
+<var>${response}</var>
+<arg>minha_sessao</arg>
+<arg>/usuarios</arg>
+<arg>json=${payload}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="FAIL" start="2025-09-12T15:01:28.522113" elapsed="0.485599">HTTPError: 400 Client Error: Bad Request for url: https://serverest.dev/usuarios</status>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>201</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="NOT RUN" start="2025-09-12T15:01:29.007882" elapsed="0.000027"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<var>${usuario_id}</var>
+<arg>${response.json()}</arg>
+<arg>_id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="NOT RUN" start="2025-09-12T15:01:29.007986" elapsed="0.000015"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<arg>${usuario_id}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="NOT RUN" start="2025-09-12T15:01:29.008110" elapsed="0.000016"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>ID do novo usuario: ${usuario_id}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-09-12T15:01:29.008199" elapsed="0.000022"/>
+</kw>
+<return>
+<value>${usuario_id}</value>
+<status status="NOT RUN" start="2025-09-12T15:01:29.008271" elapsed="0.000029"/>
+</return>
+<var>${usuario_id}</var>
+<status status="FAIL" start="2025-09-12T15:01:28.521393" elapsed="0.487145">HTTPError: 400 Client Error: Bad Request for url: https://serverest.dev/usuarios</status>
+</kw>
+<kw name="Atualizar Usuario Valido" owner="MeuResource3">
+<var>${response}</var>
+<arg>${usuario_id}</arg>
+<status status="NOT RUN" start="2025-09-12T15:01:29.008950" elapsed="0.000062"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="NOT RUN" start="2025-09-12T15:01:29.009235" elapsed="0.000029"/>
+</kw>
+<doc>Testa a atualizacao de um usuario com dados validos</doc>
+<tag>atualizacao</tag>
+<tag>positivo</tag>
+<tag>usuario</tag>
+<status status="FAIL" start="2025-09-12T15:01:28.520166" elapsed="0.489323">HTTPError: 400 Client Error: Bad Request for url: https://serverest.dev/usuarios</status>
+</test>
+<test id="s1-t8" name="TC08 - Atualizar Usuario Sem Email" line="72">
+<kw name="Criar Sessao Para API ServerRest" owner="MeuResource3">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-09-12T15:01:29.010854" level="INFO">Creating Session using : alias=minha_sessao, url=https://serverest.dev, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>minha_sessao</arg>
+<arg>${URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-09-12T15:01:29.010695" elapsed="0.000342"/>
+</kw>
+<status status="PASS" start="2025-09-12T15:01:29.010414" elapsed="0.000711"/>
+</kw>
+<kw name="Criar Novo Usuario Valido" owner="MeuResource3">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-12T15:01:29.011979" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-12T15:01:29.011751" elapsed="0.000262"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-12T15:01:29.012257" level="INFO">${payload} = {'nome': 'Isabela Regina', 'email': 'isabela@teste.com', 'password': '123456', 'administrador': '"true"'}</msg>
+<var>${payload}</var>
+<arg>nome=Isabela Regina</arg>
+<arg>email=isabela@teste.com</arg>
+<arg>password=123456</arg>
+<arg>administrador="true"</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-12T15:01:29.012124" elapsed="0.000153"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-12T15:01:29.500820" level="INFO">POST Request : url=https://serverest.dev/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '107'} 
+ body=b'{"nome": "Isabela Regina", "email": "isabela@teste.com", "password": "123456", "administrador": "\\"true\\""}' 
+ </msg>
+<msg time="2025-09-12T15:01:29.500906" level="INFO">POST Response : url=https://serverest.dev/usuarios 
+ status=400, reason=Bad Request 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '868831f47c0eabe9459c8c3e5b406556', 'date': 'Fri, 12 Sep 2025 18:01:29 GMT', 'server': 'Google Frontend', 'Content-Length': '67'} 
+ body={
+    "administrador": "administrador deve ser 'true' ou 'false'"
+} 
+ </msg>
+<msg time="2025-09-12T15:01:29.500970" level="INFO">/home/isadev/miniconda3/envs/robot/lib/python3.11/site-packages/urllib3/connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'serverest.dev'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-09-12T15:01:29.501089" level="FAIL">HTTPError: 400 Client Error: Bad Request for url: https://serverest.dev/usuarios</msg>
+<var>${response}</var>
+<arg>minha_sessao</arg>
+<arg>/usuarios</arg>
+<arg>json=${payload}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="FAIL" start="2025-09-12T15:01:29.012368" elapsed="0.489038">HTTPError: 400 Client Error: Bad Request for url: https://serverest.dev/usuarios</status>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>201</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="NOT RUN" start="2025-09-12T15:01:29.501552" elapsed="0.000019"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<var>${usuario_id}</var>
+<arg>${response.json()}</arg>
+<arg>_id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="NOT RUN" start="2025-09-12T15:01:29.501628" elapsed="0.000011"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<arg>${usuario_id}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="NOT RUN" start="2025-09-12T15:01:29.501698" elapsed="0.000010"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>ID do novo usuario: ${usuario_id}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-09-12T15:01:29.501754" elapsed="0.000010"/>
+</kw>
+<return>
+<value>${usuario_id}</value>
+<status status="NOT RUN" start="2025-09-12T15:01:29.501798" elapsed="0.000017"/>
+</return>
+<var>${usuario_id}</var>
+<status status="FAIL" start="2025-09-12T15:01:29.011422" elapsed="0.490460">HTTPError: 400 Client Error: Bad Request for url: https://serverest.dev/usuarios</status>
+</kw>
+<kw name="Atualizar Usuario Sem Email" owner="MeuResource3">
+<var>${response}</var>
+<arg>${usuario_id}</arg>
+<status status="NOT RUN" start="2025-09-12T15:01:29.502039" elapsed="0.000032"/>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>400</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="NOT RUN" start="2025-09-12T15:01:29.502155" elapsed="0.000014"/>
+</kw>
+<doc>Testa a atualizacao de um usuario sem informar o email</doc>
+<tag>atualizacao</tag>
+<tag>negativo</tag>
+<tag>usuario</tag>
+<status status="FAIL" start="2025-09-12T15:01:29.009791" elapsed="0.492509">HTTPError: 400 Client Error: Bad Request for url: https://serverest.dev/usuarios</status>
+</test>
+<test id="s1-t9" name="TC09 - Realizar Login Com Credenciais Validas" line="81">
+<kw name="Criar Sessao Para API ServerRest" owner="MeuResource3">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-09-12T15:01:29.503093" level="INFO">Creating Session using : alias=minha_sessao, url=https://serverest.dev, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>minha_sessao</arg>
+<arg>${URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-09-12T15:01:29.502991" elapsed="0.000205"/>
+</kw>
+<status status="PASS" start="2025-09-12T15:01:29.502841" elapsed="0.000393"/>
+</kw>
+<kw name="Criar Novo Usuario Valido" owner="MeuResource3">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-12T15:01:29.503619" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-12T15:01:29.503506" elapsed="0.000131"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-12T15:01:29.503794" level="INFO">${payload} = {'nome': 'Isabela Regina', 'email': 'isabela@teste.com', 'password': '123456', 'administrador': '"true"'}</msg>
+<var>${payload}</var>
+<arg>nome=Isabela Regina</arg>
+<arg>email=isabela@teste.com</arg>
+<arg>password=123456</arg>
+<arg>administrador="true"</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-12T15:01:29.503694" elapsed="0.000177"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-12T15:01:29.970773" level="INFO">POST Request : url=https://serverest.dev/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '107'} 
+ body=b'{"nome": "Isabela Regina", "email": "isabela@teste.com", "password": "123456", "administrador": "\\"true\\""}' 
+ </msg>
+<msg time="2025-09-12T15:01:29.970850" level="INFO">POST Response : url=https://serverest.dev/usuarios 
+ status=400, reason=Bad Request 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '4abdf412e55722556af905fc5ec6bdaa;o=1', 'date': 'Fri, 12 Sep 2025 18:01:29 GMT', 'server': 'Google Frontend', 'Content-Length': '67'} 
+ body={
+    "administrador": "administrador deve ser 'true' ou 'false'"
+} 
+ </msg>
+<msg time="2025-09-12T15:01:29.970924" level="INFO">/home/isadev/miniconda3/envs/robot/lib/python3.11/site-packages/urllib3/connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'serverest.dev'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-09-12T15:01:29.971050" level="FAIL">HTTPError: 400 Client Error: Bad Request for url: https://serverest.dev/usuarios</msg>
+<var>${response}</var>
+<arg>minha_sessao</arg>
+<arg>/usuarios</arg>
+<arg>json=${payload}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="FAIL" start="2025-09-12T15:01:29.503959" elapsed="0.467592">HTTPError: 400 Client Error: Bad Request for url: https://serverest.dev/usuarios</status>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>201</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="NOT RUN" start="2025-09-12T15:01:29.971796" elapsed="0.000050"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<var>${usuario_id}</var>
+<arg>${response.json()}</arg>
+<arg>_id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="NOT RUN" start="2025-09-12T15:01:29.972029" elapsed="0.000086"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<arg>${usuario_id}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="NOT RUN" start="2025-09-12T15:01:29.972296" elapsed="0.000026"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>ID do novo usuario: ${usuario_id}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-09-12T15:01:29.972440" elapsed="0.000024"/>
+</kw>
+<return>
+<value>${usuario_id}</value>
+<status status="NOT RUN" start="2025-09-12T15:01:29.972534" elapsed="0.000049"/>
+</return>
+<status status="FAIL" start="2025-09-12T15:01:29.503353" elapsed="0.469412">HTTPError: 400 Client Error: Bad Request for url: https://serverest.dev/usuarios</status>
+</kw>
+<kw name="Realizar Login Valido" owner="MeuResource3">
+<var>${token}</var>
+<status status="NOT RUN" start="2025-09-12T15:01:29.973093" elapsed="0.000046"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<arg>${token}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="NOT RUN" start="2025-09-12T15:01:29.973305" elapsed="0.000018"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Login realizado com sucesso</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2025-09-12T15:01:29.973422" elapsed="0.000013"/>
+</kw>
+<doc>Testa o login com email e senha validos</doc>
+<tag>autenticacao</tag>
+<tag>login</tag>
+<tag>positivo</tag>
+<status status="FAIL" start="2025-09-12T15:01:29.502441" elapsed="0.471156">HTTPError: 400 Client Error: Bad Request for url: https://serverest.dev/usuarios</status>
+</test>
+<test id="s1-t10" name="TC10 - Realizar Login Com Email Invalido" line="91">
+<kw name="Criar Sessao Para API ServerRest" owner="MeuResource3">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-09-12T15:01:29.974666" level="INFO">Creating Session using : alias=minha_sessao, url=https://serverest.dev, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>minha_sessao</arg>
+<arg>${URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-09-12T15:01:29.974514" elapsed="0.000366"/>
+</kw>
+<status status="PASS" start="2025-09-12T15:01:29.974255" elapsed="0.000689"/>
+</kw>
+<kw name="Realizar Login Com Email Invalido" owner="MeuResource3">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-12T15:01:29.975489" level="INFO">${headers} = {'Content-Type': 'application/json'}</msg>
+<var>${headers}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-12T15:01:29.975317" elapsed="0.000196"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-09-12T15:01:29.975708" level="INFO">${payload} = {'email': 'email_inexistente@teste.com', 'password': '123456'}</msg>
+<var>${payload}</var>
+<arg>email=email_inexistente@teste.com</arg>
+<arg>password=123456</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-09-12T15:01:29.975589" elapsed="0.000135"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-09-12T15:01:30.467383" level="INFO">POST Request : url=https://serverest.dev/login 
+ path_url=/login 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '62'} 
+ body=b'{"email": "email_inexistente@teste.com", "password": "123456"}' 
+ </msg>
+<msg time="2025-09-12T15:01:30.467546" level="INFO">POST Response : url=https://serverest.dev/login 
+ status=401, reason=Unauthorized 
+ headers={'access-control-allow-origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'content-type': 'application/json; charset=utf-8', 'x-cloud-trace-context': '8795ab67553ce8077418e4004e623a21', 'date': 'Fri, 12 Sep 2025 18:01:30 GMT', 'server': 'Google Frontend', 'Content-Length': '48'} 
+ body={
+    "message": "Email e/ou senha inválidos"
+} 
+ </msg>
+<msg time="2025-09-12T15:01:30.467706" level="INFO">/home/isadev/miniconda3/envs/robot/lib/python3.11/site-packages/urllib3/connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'serverest.dev'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-09-12T15:01:30.467929" level="FAIL">HTTPError: 401 Client Error: Unauthorized for url: https://serverest.dev/login</msg>
+<var>${response}</var>
+<arg>minha_sessao</arg>
+<arg>/login</arg>
+<arg>json=${payload}</arg>
+<arg>headers=${headers}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="FAIL" start="2025-09-12T15:01:29.975786" elapsed="0.492852">HTTPError: 401 Client Error: Unauthorized for url: https://serverest.dev/login</status>
+</kw>
+<kw name="Status Should Be" owner="RequestsLibrary">
+<arg>401</arg>
+<arg>${response}</arg>
+<doc>Fails if response status code is different than the expected.</doc>
+<status status="NOT RUN" start="2025-09-12T15:01:30.468877" elapsed="0.000026"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="NOT RUN" start="2025-09-12T15:01:30.468941" elapsed="0.000016"/>
+</return>
+<var>${response}</var>
+<status status="FAIL" start="2025-09-12T15:01:29.975106" elapsed="0.493943">HTTPError: 401 Client Error: Unauthorized for url: https://serverest.dev/login</status>
+</kw>
+<kw name="Should Be Equal As Strings" owner="BuiltIn">
+<arg>${response.status_code}</arg>
+<arg>400</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<status status="NOT RUN" start="2025-09-12T15:01:30.469247" elapsed="0.000022"/>
+</kw>
+<doc>Testa o login com email inexistente</doc>
+<tag>autenticacao</tag>
+<tag>login</tag>
+<tag>negativo</tag>
+<status status="FAIL" start="2025-09-12T15:01:29.973779" elapsed="0.495651">HTTPError: 401 Client Error: Unauthorized for url: https://serverest.dev/login</status>
+</test>
+<status status="FAIL" start="2025-09-12T15:01:25.345272" elapsed="5.124722"/>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="8" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="0" fail="2" skip="0">atualizacao</stat>
+<stat pass="0" fail="2" skip="0">autenticacao</stat>
+<stat pass="2" fail="1" skip="0">consulta</stat>
+<stat pass="0" fail="3" skip="0">criacao</stat>
+<stat pass="0" fail="2" skip="0">login</stat>
+<stat pass="1" fail="4" skip="0">negativo</stat>
+<stat pass="1" fail="4" skip="0">positivo</stat>
+<stat pass="2" fail="6" skip="0">usuario</stat>
+</tag>
+<suite>
+<stat name="MeuTeste3" id="s1" pass="2" fail="8" skip="0">MeuTeste3</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
